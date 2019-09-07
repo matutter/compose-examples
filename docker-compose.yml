@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    build: server/
+    image: exampleserver_web:latest
+    ports:
+    - "8089:8089"
+    environment:
+    - PYTHONUNBUFFERED=1
+    - PORT=8089
+  cli:
+    build: client/
+    image: exampleserver_cli:latest
+    links:
+    - web:mywebserver
+    environment:
+    - PYTHONUNBUFFERED=1
+    - SERVER_HOST=http://mywebserver:8089

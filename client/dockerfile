@@ -1,0 +1,10 @@
+FROM python:3.7-alpine
+
+ENV SERVER_HOST=http://localhost:8088
+
+ADD requirements.txt .
+RUN pip install -r requirements.txt
+ADD docker-entrypoint.sh .
+ADD client.py .
+
+ENTRYPOINT [ "sh", "docker-entrypoint.sh" ]
